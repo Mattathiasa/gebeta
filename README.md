@@ -1,5 +1,13 @@
 # ገበጣ · Gebeta Online
 
+**[Play it live](https://mattathiasa.github.io/gebeta/play/)** ·
+[How to play](https://mattathiasa.github.io/gebeta/help/) ·
+[Landing page](https://mattathiasa.github.io/gebeta/)
+
+![tests](https://img.shields.io/badge/tests-39%2F39%20passing-2E7D32)
+![analyze](https://img.shields.io/badge/flutter%20analyze-clean-2E7D32)
+![license](https://img.shields.io/badge/license-MIT-B8860B)
+
 A polished digital implementation of **Gebeta**, the traditional Ethiopian
 and Eritrean mancala game — built to keep a living game playable for the
 diaspora, and to be a portfolio-grade Flutter codebase.
@@ -77,3 +85,7 @@ Web is deliberately ad-free. Setup: `config/README.md`.
 - [ ] Turn timers + reconnect grace for online play
 - [ ] Pass-and-play local mode
 - [ ] Leaderboards (needs Firebase config; stays on free tier)
+
+## License
+
+MIT — see [LICENSE](LICENSE).

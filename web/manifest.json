@@ -1,11 +1,11 @@
 {
-    "name": "gebeta",
-    "short_name": "gebeta",
+    "name": "Gebeta",
+    "short_name": "Gebeta",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#FAF4E8",
+    "theme_color": "#5C3A21",
+    "description": "Traditional Ethiopian and Eritrean mancala — play vs AI or online with a room code, in English or Amharic.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

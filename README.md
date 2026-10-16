@@ -4,7 +4,7 @@
 [How to play](https://mattathiasa.github.io/gebeta/help/) ·
 [Landing page](https://mattathiasa.github.io/gebeta/)
 
-![tests](https://img.shields.io/badge/tests-39%2F39%20passing-2E7D32)
+![tests](https://img.shields.io/badge/tests-43%2F43%20passing-2E7D32)
 ![analyze](https://img.shields.io/badge/flutter%20analyze-clean-2E7D32)
 ![license](https://img.shields.io/badge/license-MIT-B8860B)
 
@@ -16,6 +16,8 @@ diaspora, and to be a portfolio-grade Flutter codebase.
   runs its search in a background isolate)
 - **Play online** — private 4-letter room codes, RTDB-backed, with
   client-side dual-compute move validation
+- **Pass & Play** — two people, one device, no network needed; the
+  board flips each turn with a hand-off screen in between
 - **EN / አማ** — fully localized, bundled NotoSansEthiopic
 - **Web + Android** — one codebase; web ships ad-free, Android carries
   AdMob (test ads until configured)
@@ -28,7 +30,7 @@ diaspora, and to be a portfolio-grade Flutter codebase.
 flutter pub get
 flutter run -d chrome        # web
 flutter run                  # connected Android device
-flutter test                 # 39 tests: engine, AI, controller, rooms
+flutter test                 # 43 tests: engine, AI, controller, local, rooms
 ```
 
 From the workspace root you can also `./run_flutter_app.sh gebeta run`.
@@ -83,7 +85,6 @@ Web is deliberately ad-free. Setup: `config/README.md`.
 - [ ] Rules review with a native player (docs/RULESETS.md TODOs)
 - [ ] Satr and Shambat as the "hub" expands
 - [ ] Turn timers + reconnect grace for online play
-- [ ] Pass-and-play local mode
 - [ ] Leaderboards (needs Firebase config; stays on free tier)
 
 ## License

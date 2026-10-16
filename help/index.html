@@ -1,0 +1,327 @@
+<title>How to play Gebeta</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Work+Sans:wght@400;500;600;700&family=Noto+Sans+Ethiopic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap"
+  rel="stylesheet"
+/>
+
+<style>
+  :root {
+    --bg: #faf4e8;
+    --surface: #f1e6d0;
+    --surface-raised: #fffbf2;
+    --wood: #8b5e3c;
+    --wood-dark: #5c3a21;
+    --wood-darkest: #3e2723;
+    --gold: #b8860b;
+    --gold-bright: #d4a017;
+    --honey: #e8b94a;
+    --seed-light: #f5e6c8;
+    --ink: #2b1d12;
+    --ink-soft: #6b5644;
+    --win: #2e7d32;
+    --danger: #c62828;
+    --line: rgba(60, 38, 20, 0.14);
+    --shadow: rgba(40, 24, 10, 0.25);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1a120b;
+      --surface: #2b1d12;
+      --surface-raised: #3a281a;
+      --wood: #a4764e;
+      --wood-dark: #8b5e3c;
+      --wood-darkest: #241711;
+      --gold: #e0ac2b;
+      --gold-bright: #f0c04e;
+      --honey: #e8b94a;
+      --seed-light: #f5e6c8;
+      --ink: #faf4e8;
+      --ink-soft: #cdb89a;
+      --line: rgba(250, 244, 232, 0.14);
+      --shadow: rgba(0, 0, 0, 0.5);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1a120b;
+    --surface: #2b1d12;
+    --surface-raised: #3a281a;
+    --wood: #a4764e;
+    --wood-dark: #8b5e3c;
+    --wood-darkest: #241711;
+    --gold: #e0ac2b;
+    --gold-bright: #f0c04e;
+    --honey: #e8b94a;
+    --seed-light: #f5e6c8;
+    --ink: #faf4e8;
+    --ink-soft: #cdb89a;
+    --line: rgba(250, 244, 232, 0.14);
+    --shadow: rgba(0, 0, 0, 0.5);
+  }
+
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Work Sans", system-ui, -apple-system, sans-serif;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { animation-duration: 0.001ms !important; transition-duration: 0.001ms !important; }
+  }
+  h1, h2, h3 { font-family: "Spectral", Georgia, serif; font-weight: 600; text-wrap: balance; margin: 0; color: var(--ink); }
+  .eth { font-family: "Noto Sans Ethiopic", "Spectral", serif; }
+  a { color: inherit; }
+  .wrap { max-width: 880px; margin: 0 auto; padding: 0 28px; }
+  section { padding: 64px 0; }
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace; font-size: 0.72rem; letter-spacing: 0.14em;
+    text-transform: uppercase; color: var(--ink-soft); display: inline-flex; align-items: center; gap: 10px;
+  }
+  .eyebrow::before { content: ""; width: 18px; height: 1px; background: var(--gold); }
+
+  .topbar {
+    position: sticky; top: 0; z-index: 30; backdrop-filter: blur(10px);
+    background: color-mix(in srgb, var(--bg) 82%, transparent); border-bottom: 1px solid var(--line);
+  }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; height: 64px; max-width: 1120px; }
+  .wordmark { font-family: "Spectral", serif; font-weight: 700; font-size: 1.15rem; display: flex; align-items: baseline; gap: 8px; text-decoration: none; }
+  .wordmark .eth { font-size: 1.2rem; color: var(--gold-bright); }
+  .topbar nav { display: flex; gap: 10px; }
+  .topbar nav a {
+    text-decoration: none; font-family: "IBM Plex Mono", monospace; font-size: 0.82rem; color: var(--ink-soft);
+    border: 1px solid var(--line); padding: 8px 14px; border-radius: 999px; transition: border-color 0.15s, color 0.15s;
+  }
+  .topbar nav a:hover, .topbar nav a:focus-visible { border-color: var(--gold); color: var(--ink); }
+  .topbar nav a.primary { background: var(--gold-bright); color: #241509; border-color: transparent; font-weight: 600; }
+
+  .hero { padding-top: 56px; padding-bottom: 20px; }
+  .hero h1 { font-size: clamp(2rem, 4.2vw, 2.9rem); line-height: 1.1; margin: 18px 0 16px; }
+  .hero h1 .eth { color: var(--gold-bright); }
+  .hero p.lede { font-size: 1.08rem; color: var(--ink-soft); max-width: 56ch; margin: 0; }
+
+  .steps { display: flex; flex-direction: column; gap: 0; }
+  .step {
+    display: grid; grid-template-columns: 56px 1fr; gap: 22px; padding: 36px 0; border-top: 1px solid var(--line);
+  }
+  .step:last-child { border-bottom: 1px solid var(--line); }
+  .step-num {
+    font-family: "IBM Plex Mono", monospace; font-weight: 600; font-size: 1.3rem; color: var(--gold-bright);
+    line-height: 1; padding-top: 4px;
+  }
+  .step h2 { font-size: 1.4rem; margin-bottom: 10px; }
+  .step p { color: var(--ink-soft); margin: 0 0 12px; max-width: 58ch; }
+  .step p:last-child { margin-bottom: 0; }
+  .step .callout {
+    margin-top: 14px; padding: 14px 16px; border-radius: 12px; background: var(--surface-raised);
+    border: 1px solid var(--line); font-size: 0.92rem; color: var(--ink);
+  }
+  .step .callout strong { color: var(--gold-bright); }
+
+  /* mini board diagram */
+  .mini-board {
+    background: linear-gradient(165deg, var(--wood), var(--wood-dark) 70%);
+    border-radius: 16px; padding: 16px 14px; margin-top: 16px; max-width: 380px;
+    box-shadow: 0 16px 34px -18px var(--shadow);
+  }
+  .mini-row { display: flex; justify-content: center; gap: 7px; margin: 5px 0; }
+  .mini-pit {
+    width: 38px; height: 38px; border-radius: 50%; background: var(--wood-darkest);
+    display: flex; align-items: center; justify-content: center; position: relative;
+    font-family: "IBM Plex Mono", monospace; font-size: 0.62rem; color: rgba(245,230,200,0.9);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,0.4);
+  }
+  .mini-pit.hi { box-shadow: 0 0 0 2px var(--gold-bright), 0 0 10px 1px rgba(212,160,23,0.8); }
+  .mini-pit.captured { background: color-mix(in srgb, var(--danger) 30%, var(--wood-darkest)); }
+  .mini-cap { text-align: center; font-family: "IBM Plex Mono", monospace; font-size: 0.65rem; color: rgba(245,230,200,0.55); margin-top: 6px; }
+
+  .cheatsheet { background: var(--surface-raised); border: 1px solid var(--line); border-radius: 18px; padding: 32px 28px; }
+  .cheatsheet h2 { font-size: 1.3rem; margin-bottom: 16px; }
+  .cheatsheet ul { margin: 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 12px; }
+  .cheatsheet li { display: flex; gap: 12px; font-size: 0.95rem; }
+  .cheatsheet li::before { content: "•"; color: var(--gold-bright); font-weight: 700; }
+
+  .cta-end { text-align: center; padding: 70px 0 90px; }
+  .cta-end .btn {
+    display: inline-flex; font-family: "Work Sans", sans-serif; font-weight: 600; font-size: 1rem;
+    padding: 15px 28px; border-radius: 10px; text-decoration: none;
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold)); color: #241509;
+    box-shadow: 0 10px 24px -8px var(--shadow);
+  }
+  .cta-end p { color: var(--ink-soft); margin-bottom: 18px; }
+
+  footer { border-top: 1px solid var(--line); padding: 36px 0; }
+  footer .wrap { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; max-width: 1120px; }
+  footer .credit { color: var(--ink-soft); font-size: 0.85rem; }
+  footer a.repo { text-decoration: none; font-family: "IBM Plex Mono", monospace; font-size: 0.82rem; color: var(--ink); border-bottom: 1px solid var(--gold); }
+
+  @media (max-width: 560px) {
+    .step { grid-template-columns: 1fr; gap: 6px; }
+    .step-num { padding-top: 0; }
+    section { padding: 44px 0; }
+  }
+</style>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="wordmark" href="../"><span class="eth">ገበጣ</span> Gebeta</a>
+    <nav>
+      <a href="../">Home</a>
+      <a href="../play/" class="primary">Play now</a>
+    </nav>
+  </div>
+</div>
+
+<header class="wrap hero">
+  <span class="eyebrow">How to play</span>
+  <h1>Four rules. <span class="eth">ገበጣ</span> in two minutes.</h1>
+  <p class="lede">
+    Gebeta looks intimidating the first time someone's grandmother wins in
+    four moves. It isn't — it's four rules stacked on top of each other.
+    Here's each one, in order, with the board as it actually looks in the app.
+  </p>
+</header>
+
+<section class="wrap">
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">01</div>
+      <div>
+        <h2>The board</h2>
+        <p>
+          Two rows of six pits. The row closest to you is yours; the row
+          across from you is your opponent's. Every pit starts with 4 seeds
+          — 48 seeds total, and they never leave the game, they just move
+          between pits or into a captured pile.
+        </p>
+        <p>
+          There's no "home store" like some mancala games — captured seeds
+          go straight to your score. Whoever has captured more than 24 of
+          the 48 when the game ends wins.
+        </p>
+        <div class="mini-board" role="img" aria-label="Starting position, four seeds in every pit">
+          <div class="mini-row">
+            <div class="mini-pit">4</div><div class="mini-pit">4</div><div class="mini-pit">4</div>
+            <div class="mini-pit">4</div><div class="mini-pit">4</div><div class="mini-pit">4</div>
+          </div>
+          <div class="mini-row">
+            <div class="mini-pit">4</div><div class="mini-pit">4</div><div class="mini-pit">4</div>
+            <div class="mini-pit">4</div><div class="mini-pit">4</div><div class="mini-pit">4</div>
+          </div>
+          <div class="mini-cap">opponent's row (top) · your row (bottom) — the starting position</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">02</div>
+      <div>
+        <h2>Making a move ("sowing")</h2>
+        <p>
+          On your turn, pick any pit on your side that has at least one
+          seed. Scoop up everything in it, then drop one seed into each
+          pit going <strong>clockwise</strong> around the whole board —
+          across your row, up into your opponent's row, across theirs,
+          and back to yours if you have enough seeds to make it all the
+          way around. (If you do lap all the way back, you skip the pit
+          you started from — you never drop a seed back into the hole you
+          just emptied.)
+        </p>
+        <div class="callout">
+          Think of the two rows as one continuous loop, not two separate
+          lines. The app mirrors the opponent's row on screen specifically
+          so this loop reads left-to-right-then-back, matching the physical
+          board.
+        </div>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">03</div>
+      <div>
+        <h2>Capturing seeds</h2>
+        <p>
+          This is the only genuinely tricky part, and it's one rule with a
+          backup clause:
+        </p>
+        <p>
+          <strong>Main rule —</strong> if the <em>very last seed</em> you
+          drop lands in one of your <em>opponent's</em> pits and that pit
+          now holds exactly <strong>2 or 3</strong> seeds, you capture the
+          whole pit. Then look at the pit immediately before it (the one
+          you filled just before this one) — if that one is also sitting
+          at 2 or 3, capture that too, and keep walking backward as long as
+          the streak holds.
+        </p>
+        <div class="mini-board" role="img" aria-label="Capture chain example">
+          <div class="mini-row">
+            <div class="mini-pit captured">0</div><div class="mini-pit captured">0</div><div class="mini-pit hi">3</div>
+            <div class="mini-pit">5</div><div class="mini-pit">1</div><div class="mini-pit">4</div>
+          </div>
+          <div class="mini-row">
+            <div class="mini-pit">0</div><div class="mini-pit">4</div><div class="mini-pit">4</div>
+            <div class="mini-pit">4</div><div class="mini-pit">4</div><div class="mini-pit">0</div>
+          </div>
+          <div class="mini-cap">last seed lands on the gold pit (3) → captured, then the pit before it (also landed-on, now 2 or 3) → captured too</div>
+        </div>
+        <p>
+          <strong>Backup rule —</strong> if the main rule didn't trigger
+          (your last seed landed on your opponent's side but that pit
+          wasn't at 2 or 3, or on an empty pit of theirs), but it <em>did</em>
+          land in one of your own pits and left it at 2 or 3 — you capture
+          just that one pit.
+        </p>
+      </div>
+    </div>
+
+    <div class="step">
+      <div class="step-num">04</div>
+      <div>
+        <h2>You can't starve your opponent</h2>
+        <p>
+          A move that would leave your opponent with <strong>zero</strong>
+          seeds anywhere in their row (after captures resolve) is illegal
+          — <em>unless</em> it's genuinely the only move you have, in which
+          case it's forced. And if your opponent's row is already empty,
+          you must play a move that gives them seeds; you can't just stall.
+        </p>
+        <p>
+          If you ever have no legal move at all, you pass and the turn goes
+          back to your opponent. Two passes in a row (the board's frozen
+          for both sides) ends the game. As a backstop, 50 moves without a
+          single capture also ends it — the score stands as-is, so a
+          cautious game can't stall forever.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="cheatsheet">
+    <h2>If you remember nothing else</h2>
+    <ul>
+      <li>Pick a pit on your side, sow one seed per pit clockwise around the whole board.</li>
+      <li>Land your last seed on an opponent's pit that's now at 2 or 3 → capture it, and keep capturing backward while the streak holds.</li>
+      <li>No capture there, but your last seed left one of <em>your</em> pits at 2 or 3 → capture just that one.</li>
+      <li>Never leave your opponent with nothing, unless you truly have no other option.</li>
+      <li>More than 24 of the 48 seeds captured wins. 24–24 is a draw.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="cta-end wrap">
+  <p>The AI's easy difficulty is genuinely easy. Go lose to it a few times first.</p>
+  <a class="btn" href="../play/">Play now ↗</a>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="credit">Ruleset documented in full at <code>docs/RULESETS.md</code> in the repo.</span>
+    <a class="repo" href="https://github.com/Mattathiasa/gebeta" target="_blank" rel="noopener">github.com/Mattathiasa/gebeta ↗</a>
+  </div>
+</footer>

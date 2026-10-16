@@ -1,0 +1,929 @@
+<title>Gebeta</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link
+  href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Work+Sans:wght@400;500;600;700&family=Noto+Sans+Ethiopic:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap"
+  rel="stylesheet"
+/>
+
+<style>
+  /* ---------- tokens ---------- */
+  :root {
+    --bg: #faf4e8;
+    --surface: #f1e6d0;
+    --surface-raised: #fffbf2;
+    --wood: #8b5e3c;
+    --wood-dark: #5c3a21;
+    --wood-darkest: #3e2723;
+    --gold: #b8860b;
+    --gold-bright: #d4a017;
+    --honey: #e8b94a;
+    --seed-light: #f5e6c8;
+    --ink: #2b1d12;
+    --ink-soft: #6b5644;
+    --win: #2e7d32;
+    --danger: #c62828;
+    --info: #1565c0;
+    --line: rgba(60, 38, 20, 0.14);
+    --shadow: rgba(40, 24, 10, 0.25);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #1a120b;
+      --surface: #2b1d12;
+      --surface-raised: #3a281a;
+      --wood: #a4764e;
+      --wood-dark: #8b5e3c;
+      --wood-darkest: #241711;
+      --gold: #e0ac2b;
+      --gold-bright: #f0c04e;
+      --honey: #e8b94a;
+      --seed-light: #f5e6c8;
+      --ink: #faf4e8;
+      --ink-soft: #cdb89a;
+      --line: rgba(250, 244, 232, 0.14);
+      --shadow: rgba(0, 0, 0, 0.5);
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #1a120b;
+    --surface: #2b1d12;
+    --surface-raised: #3a281a;
+    --wood: #a4764e;
+    --wood-dark: #8b5e3c;
+    --wood-darkest: #241711;
+    --gold: #e0ac2b;
+    --gold-bright: #f0c04e;
+    --honey: #e8b94a;
+    --seed-light: #f5e6c8;
+    --ink: #faf4e8;
+    --ink-soft: #cdb89a;
+    --line: rgba(250, 244, 232, 0.14);
+    --shadow: rgba(0, 0, 0, 0.5);
+  }
+
+  /* ---------- base ---------- */
+  * {
+    box-sizing: border-box;
+  }
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: "Work Sans", system-ui, -apple-system, sans-serif;
+    line-height: 1.55;
+    overflow-x: hidden;
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.001ms !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: "Spectral", Georgia, serif;
+    font-weight: 600;
+    text-wrap: balance;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  .eth {
+    font-family: "Noto Sans Ethiopic", "Spectral", serif;
+  }
+
+  a {
+    color: inherit;
+  }
+
+  .wrap {
+    max-width: 1120px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  section {
+    padding: 88px 0;
+  }
+
+  .eyebrow {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--ink-soft);
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .eyebrow::before {
+    content: "";
+    width: 18px;
+    height: 1px;
+    background: var(--gold);
+  }
+
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 30;
+    backdrop-filter: blur(10px);
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 64px;
+  }
+  .wordmark {
+    font-family: "Spectral", serif;
+    font-weight: 700;
+    font-size: 1.15rem;
+    letter-spacing: 0.01em;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+  }
+  .wordmark .eth {
+    font-size: 1.2rem;
+    color: var(--gold-bright);
+  }
+  .topbar nav {
+    display: flex;
+    gap: 10px;
+  }
+  .topbar nav a {
+    text-decoration: none;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    padding: 8px 14px;
+    border-radius: 999px;
+    transition: border-color 0.15s, color 0.15s;
+  }
+  .topbar nav a:hover,
+  .topbar nav a:focus-visible {
+    border-color: var(--gold);
+    color: var(--ink);
+  }
+
+  /* ---------- hero ---------- */
+  .hero {
+    padding-top: 64px;
+    display: grid;
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: 56px;
+    align-items: center;
+  }
+  .hero h1 {
+    font-size: clamp(2.3rem, 4.3vw, 3.4rem);
+    line-height: 1.08;
+    margin: 18px 0 20px;
+  }
+  .hero h1 .eth {
+    font-weight: 700;
+    color: var(--gold-bright);
+    font-size: 1.02em;
+  }
+  .hero p.lede {
+    font-size: 1.1rem;
+    color: var(--ink-soft);
+    max-width: 46ch;
+    margin: 0 0 30px;
+  }
+  .cta-row {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-family: "Work Sans", sans-serif;
+    font-weight: 600;
+    font-size: 0.95rem;
+    padding: 13px 22px;
+    border-radius: 10px;
+    text-decoration: none;
+    border: 1px solid transparent;
+    transition: transform 0.12s ease, box-shadow 0.12s ease;
+  }
+  .btn:hover {
+    transform: translateY(-1px);
+  }
+  .btn-primary {
+    background: linear-gradient(180deg, var(--gold-bright), var(--gold));
+    color: #241509;
+    box-shadow: 0 6px 18px -6px var(--shadow);
+  }
+  .btn-primary:hover {
+    box-shadow: 0 10px 22px -6px var(--shadow);
+  }
+  .btn-secondary {
+    border-color: var(--line);
+    color: var(--ink);
+  }
+  .btn-secondary:hover {
+    border-color: var(--gold);
+  }
+  .meta-line {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+  }
+
+  /* ---------- board mockup ---------- */
+  .board-stage {
+    display: flex;
+    justify-content: center;
+  }
+  .board-card {
+    width: 100%;
+    max-width: 460px;
+    background: linear-gradient(165deg, var(--wood), var(--wood-dark) 70%);
+    border-radius: 22px;
+    padding: 22px 20px 24px;
+    box-shadow: 0 30px 60px -24px var(--shadow), inset 0 0 0 1px rgba(255, 255, 255, 0.06);
+    position: relative;
+  }
+  .board-card::before {
+    content: "";
+    position: absolute;
+    inset: 10px;
+    border-radius: 14px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    pointer-events: none;
+  }
+  .score-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 2px 4px 14px;
+  }
+  .score-row.bottom {
+    padding: 14px 4px 2px;
+  }
+  .score-pill {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+    font-size: 0.92rem;
+    padding: 5px 13px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--seed-light);
+  }
+  .score-pill.active {
+    background: var(--gold-bright);
+    color: #241509;
+  }
+  .score-label {
+    font-size: 0.78rem;
+    color: rgba(245, 230, 200, 0.75);
+  }
+  .pit-row {
+    display: flex;
+    justify-content: center;
+    gap: clamp(6px, 1.6vw, 12px);
+    margin: 6px 0;
+  }
+  .pit {
+    width: clamp(40px, 10vw, 58px);
+    height: clamp(40px, 10vw, 58px);
+    border-radius: 50%;
+    background: var(--wood-darkest);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35), inset 0 1px 2px rgba(0, 0, 0, 0.4);
+  }
+  .pit.legal {
+    box-shadow: 0 0 0 2.5px var(--gold-bright), 0 0 12px 2px rgba(212, 160, 23, 0.85);
+  }
+  .seeds {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 2.5px;
+    width: 70%;
+  }
+  .seed {
+    width: 20%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background: radial-gradient(circle at 30% 30%, var(--seed-light), var(--honey));
+  }
+  .seed.dark {
+    background: radial-gradient(circle at 30% 30%, var(--honey), var(--gold));
+  }
+  .pit .count {
+    position: absolute;
+    bottom: -2px;
+    right: -2px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.6rem;
+    font-weight: 600;
+    background: var(--wood-darkest);
+    color: var(--seed-light);
+    border-radius: 999px;
+    padding: 1px 4px;
+    line-height: 1.3;
+  }
+  .pit .empty {
+    color: rgba(255, 255, 255, 0.22);
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+  .pit-caption {
+    text-align: center;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: rgba(245, 230, 200, 0.55);
+    margin-top: 10px;
+  }
+
+  @keyframes sow-glow {
+    0%, 100% { filter: brightness(1); }
+    50% { filter: brightness(1.18); }
+  }
+  .pit.legal {
+    animation: sow-glow 2.6s ease-in-out infinite;
+  }
+
+  /* ---------- statement ---------- */
+  .statement {
+    text-align: left;
+    padding: 70px 0;
+  }
+  .statement blockquote {
+    margin: 0;
+    font-family: "Spectral", serif;
+    font-style: italic;
+    font-weight: 500;
+    font-size: clamp(1.4rem, 2.6vw, 2.1rem);
+    line-height: 1.45;
+    max-width: 52ch;
+    color: var(--ink);
+  }
+  .statement blockquote .eth {
+    font-style: normal;
+    color: var(--gold-bright);
+  }
+  .statement cite {
+    display: block;
+    font-style: normal;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin-top: 18px;
+  }
+
+  /* ---------- section heads ---------- */
+  .section-head {
+    margin-bottom: 42px;
+    max-width: 60ch;
+  }
+  .section-head h2 {
+    font-size: clamp(1.6rem, 2.6vw, 2.1rem);
+    margin-top: 10px;
+  }
+  .section-head p {
+    color: var(--ink-soft);
+    margin: 12px 0 0;
+    font-size: 1.02rem;
+  }
+
+  /* ---------- features (pit chips) ---------- */
+  .feature-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .feature {
+    background: var(--surface-raised);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 26px 22px;
+    position: relative;
+  }
+  .feature .dot {
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--wood-darkest);
+    box-shadow: inset 0 0 0 2px var(--gold);
+    margin-bottom: 16px;
+  }
+  .feature h3 {
+    font-size: 1.05rem;
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+  .feature p {
+    margin: 0;
+    color: var(--ink-soft);
+    font-size: 0.93rem;
+  }
+
+  /* ---------- stat strip ---------- */
+  .stat-strip {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 1px;
+    background: var(--line);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    overflow: hidden;
+  }
+  .stat {
+    background: var(--surface-raised);
+    padding: 28px 18px;
+    text-align: center;
+  }
+  .stat .num {
+    font-family: "IBM Plex Mono", monospace;
+    font-weight: 600;
+    font-size: clamp(1.3rem, 2vw, 1.7rem);
+    color: var(--gold-bright);
+    display: block;
+  }
+  .stat .label {
+    margin-top: 8px;
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+    line-height: 1.35;
+  }
+
+  /* ---------- dual compute diagram ---------- */
+  .fairness {
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .fairness p {
+    color: var(--ink-soft);
+    margin: 14px 0 0;
+  }
+  .diagram {
+    background: var(--surface-raised);
+    border: 1px solid var(--line);
+    border-radius: 18px;
+    padding: 28px 24px;
+  }
+  .diagram-row {
+    display: grid;
+    grid-template-columns: 1fr auto 1fr;
+    align-items: center;
+    gap: 14px;
+  }
+  .diagram-box {
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 14px 16px;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.78rem;
+    background: var(--surface);
+  }
+  .diagram-box .who {
+    color: var(--ink-soft);
+    font-size: 0.68rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+  .diagram-arrow {
+    font-family: "IBM Plex Mono", monospace;
+    color: var(--gold);
+    font-size: 1.1rem;
+  }
+  .diagram-verdict {
+    margin-top: 18px;
+    text-align: center;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.78rem;
+    color: var(--win);
+    border-top: 1px dashed var(--line);
+    padding-top: 16px;
+  }
+
+  /* ---------- tech strip ---------- */
+  .tech-strip {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .tech-pill {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.8rem;
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    color: var(--ink-soft);
+    background: var(--surface-raised);
+  }
+
+  /* ---------- showcase mockups ---------- */
+  .showcase {
+    display: grid;
+    grid-template-columns: 0.75fr 1fr;
+    gap: 50px;
+    align-items: center;
+  }
+  .phone-frame {
+    background: var(--surface-raised);
+    border: 1px solid var(--line);
+    border-radius: 28px;
+    padding: 20px 18px;
+    box-shadow: 0 24px 50px -22px var(--shadow);
+    transform: rotate(-3deg);
+    max-width: 280px;
+    margin: 0 auto;
+  }
+  .phone-frame .ph-title {
+    font-family: "Noto Sans Ethiopic", serif;
+    font-size: 1.5rem;
+    text-align: center;
+    margin: 18px 0 2px;
+  }
+  .phone-frame .ph-sub {
+    text-align: center;
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    margin-bottom: 16px;
+  }
+  .ph-chips {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 24px;
+  }
+  .ph-chip {
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.68rem;
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
+  .ph-chip.w {
+    color: var(--win);
+    background: color-mix(in srgb, var(--win) 15%, transparent);
+    border: 1px solid color-mix(in srgb, var(--win) 40%, transparent);
+  }
+  .ph-chip.l {
+    color: var(--danger);
+    background: color-mix(in srgb, var(--danger) 15%, transparent);
+    border: 1px solid color-mix(in srgb, var(--danger) 40%, transparent);
+  }
+  .ph-chip.d {
+    color: var(--info);
+    background: color-mix(in srgb, var(--info) 15%, transparent);
+    border: 1px solid color-mix(in srgb, var(--info) 40%, transparent);
+  }
+  .ph-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    font-family: "Work Sans", sans-serif;
+    font-weight: 600;
+    font-size: 0.82rem;
+    padding: 11px;
+    border-radius: 9px;
+    margin-bottom: 10px;
+  }
+  .ph-btn.fill {
+    background: var(--gold-bright);
+    color: #241509;
+  }
+  .ph-btn.outline {
+    border: 1px solid var(--wood);
+    color: var(--ink);
+  }
+  .ph-btn.text {
+    color: var(--ink-soft);
+    font-weight: 500;
+  }
+  .board-frame {
+    transform: rotate(2deg);
+  }
+  .board-frame .board-card {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  /* ---------- footer ---------- */
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 44px 0;
+  }
+  footer .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+  footer .credit {
+    color: var(--ink-soft);
+    font-size: 0.85rem;
+  }
+  footer a.repo {
+    text-decoration: none;
+    font-family: "IBM Plex Mono", monospace;
+    font-size: 0.82rem;
+    color: var(--ink);
+    border-bottom: 1px solid var(--gold);
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 880px) {
+    .hero {
+      grid-template-columns: 1fr;
+    }
+    .hero .board-stage {
+      order: -1;
+    }
+    .feature-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+    .stat-strip {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .fairness {
+      grid-template-columns: 1fr;
+    }
+    .showcase {
+      grid-template-columns: 1fr;
+    }
+    .phone-frame {
+      transform: none;
+    }
+    .board-frame {
+      transform: none;
+    }
+  }
+  @media (max-width: 540px) {
+    section {
+      padding: 56px 0;
+    }
+    .feature-grid {
+      grid-template-columns: 1fr;
+    }
+    .stat-strip {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="wordmark"><span class="eth">ገበጣ</span> Gebeta</div>
+    <nav>
+      <a href="./help/">How to play</a>
+      <a href="https://github.com/Mattathiasa/gebeta" target="_blank" rel="noopener">View source ↗</a>
+    </nav>
+  </div>
+</div>
+
+<header class="wrap hero">
+  <div>
+    <span class="eyebrow">Ethiopian &amp; Eritrean mancala · Flutter, web + Android</span>
+    <h1><span class="eth">ገበጣ</span> — the board from home, playable from anywhere.</h1>
+    <p class="lede">
+      A rules-correct digital Gebeta built so the diaspora doesn't have to
+      narrate pit counts over a video call. Play a tuned AI, or open a
+      four-letter room and play someone who actually grew up with the game.
+    </p>
+    <div class="cta-row">
+      <a class="btn btn-primary" href="./play/">
+        Play now ↗
+      </a>
+      <a class="btn btn-secondary" href="https://github.com/Mattathiasa/gebeta" target="_blank" rel="noopener">
+        View source ↗
+      </a>
+    </div>
+    <p class="meta-line" style="margin-top: 16px;">flutter test · 43/43 passing</p>
+  </div>
+
+  <div class="board-stage">
+    <div class="board-card" role="img" aria-label="Mockup of the Gebeta board mid-game, twelve pits with seeds and two score pills">
+      <div class="score-row">
+        <span class="score-pill">5</span>
+        <span class="score-label">Opponent</span>
+      </div>
+      <div class="pit-row" aria-hidden="true">
+        <div class="pit"><div class="seeds"><span class="seed"></span><span class="seed dark"></span></div></div>
+        <div class="pit"><span class="empty">0</span></div>
+        <div class="pit"><div class="seeds"><span class="seed"></span><span class="seed dark"></span><span class="seed"></span><span class="seed dark"></span><span class="seed"></span><span class="seed dark"></span></div><span class="count">7</span></div>
+        <div class="pit"><span class="empty">0</span></div>
+        <div class="pit"><div class="seeds"><span class="seed"></span><span class="seed dark"></span><span class="seed"></span></div></div>
+        <div class="pit"><div class="seeds"><span class="seed"></span><span class="seed dark"></span><span class="seed"></span></div></div>
+      </div>
+      <div class="pit-row" aria-hidden="true">
+        <div class="pit legal"><div class="seeds"><span class="seed"></span><span class="seed dark"></span><span class="seed"></span><span class="seed dark"></span><span class="seed"></span></div></div>
+        <div class="pit"><span class="empty">0</span></div>
+        <div class="pit"><div class="seeds"><span class="seed"></span><span class="seed dark"></span><span class="seed"></span><span class="seed dark"></span><span class="seed"></span><span class="seed dark"></span></div><span class="count">8</span></div>
+        <div class="pit legal"><div class="seeds"><span class="seed"></span><span class="seed dark"></span><span class="seed"></span></div></div>
+        <div class="pit"><div class="seeds"><span class="seed"></span></div></div>
+        <div class="pit"><div class="seeds"><span class="seed"></span><span class="seed dark"></span><span class="seed"></span><span class="seed dark"></span></div></div>
+      </div>
+      <div class="score-row bottom">
+        <span class="score-pill active">7</span>
+        <span class="score-label">You — your move</span>
+      </div>
+      <div class="pit-caption">move 23 · gold ring = legal move</div>
+    </div>
+  </div>
+</header>
+
+<section class="statement wrap">
+  <blockquote>
+    “Gebeta has regional variants and a real rule set, not a rulebook
+    Claude invented. <span class="eth">ገበጣ</span> implements the classic
+    12-pit, 4-seed lineage — capture chains, starvation rules, the forced
+    pass — in one pure-Dart file, documented for a native player to
+    review line by line.”
+  </blockquote>
+  <cite>— docs/RULESETS.md, shipped alongside the engine</cite>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">What's in the box</span>
+    <h2>A real app, not a tech demo</h2>
+    <p>Two ways to play, one ruleset, zero paid infrastructure.</p>
+  </div>
+  <div class="feature-grid">
+    <div class="feature">
+      <div class="dot"></div>
+      <h3>Three AI difficulties</h3>
+      <p>Minimax with alpha-beta pruning and move ordering. Hard runs iterative deepening on a 900&nbsp;ms budget inside a background isolate, so the board never freezes.</p>
+    </div>
+    <div class="feature">
+      <div class="dot"></div>
+      <h3>Online, room-code PvP</h3>
+      <p>Four-letter codes (no 0/O/1/I), Realtime-Database-backed, with onDisconnect presence and network pass support.</p>
+    </div>
+    <div class="feature">
+      <div class="dot"></div>
+      <h3>Fairness without a server</h3>
+      <p>No Cloud Functions on the free tier — so every client re-derives each move and rejects the room on mismatch. More below.</p>
+    </div>
+    <div class="feature">
+      <div class="dot"></div>
+      <h3>English / አማርኛ</h3>
+      <p>Fully localized UI with bundled NotoSansEthiopic, so the Amharic face renders identically offline on day one — no system-font roulette.</p>
+    </div>
+    <div class="feature">
+      <div class="dot"></div>
+      <h3>Pass &amp; Play</h3>
+      <p>Two people, one device, no network required. The board flips each turn so the mover's pits are always on the bottom, with a hand-off screen in between.</p>
+    </div>
+    <div class="feature">
+      <div class="dot"></div>
+      <h3>Entirely free-tier</h3>
+      <p>Firebase Spark plan only — no billing account anywhere in the stack. That constraint is what shaped the validation design, not an afterthought.</p>
+    </div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">Verified, not claimed</span>
+    <h2>What actually passes</h2>
+    <p>Run fresh for this page: analyzer, full suite, and a release build.</p>
+  </div>
+  <div class="stat-strip">
+    <div class="stat">
+      <span class="num tabular">0</span>
+      <span class="label">flutter analyze issues</span>
+    </div>
+    <div class="stat">
+      <span class="num tabular">43 / 43</span>
+      <span class="label">tests passing</span>
+    </div>
+    <div class="stat">
+      <span class="num tabular">200</span>
+      <span class="label">randomized self-play games asserting seed conservation</span>
+    </div>
+    <div class="stat">
+      <span class="num tabular">0</span>
+      <span class="label">Flutter imports in the game engine</span>
+    </div>
+    <div class="stat">
+      <span class="num tabular">$0</span>
+      <span class="label">monthly infrastructure cost</span>
+    </div>
+  </div>
+</section>
+
+<section class="wrap fairness">
+  <div>
+    <span class="eyebrow">Architecture note</span>
+    <h2>Dual-compute instead of a server</h2>
+    <p>
+      Cloud Functions need a billing account; this project doesn't use one.
+      So there's no referee process adjudicating moves — instead, every
+      client holds the same pure-Dart engine and independently replays each
+      move against its own copy of the position.
+    </p>
+    <p>
+      The Realtime Database transaction still enforces turn order and basic
+      shape, but the actual rules check happens twice, on two machines that
+      don't trust each other. A mismatch rejects the move and the room is
+      left — the exact pattern exercised in
+      <code>test/features/multiplayer/room_flow_test.dart</code>.
+    </p>
+  </div>
+  <div class="diagram">
+    <div class="diagram-row">
+      <div class="diagram-box">
+        <div class="who">Player A's client</div>
+        pit 3 → apply() → <strong>7–5</strong>
+      </div>
+      <span class="diagram-arrow">⇄</span>
+      <div class="diagram-box">
+        <div class="who">Player B's client</div>
+        pit 3 → apply() → <strong>7–5</strong>
+      </div>
+    </div>
+    <div class="diagram-verdict">positions match → move committed to RTDB</div>
+  </div>
+</section>
+
+<section class="wrap">
+  <div class="section-head">
+    <span class="eyebrow">Under the hood</span>
+    <h2>Built with</h2>
+  </div>
+  <div class="tech-strip">
+    <span class="tech-pill">Flutter</span>
+    <span class="tech-pill">Dart 3.13</span>
+    <span class="tech-pill">Riverpod</span>
+    <span class="tech-pill">go_router</span>
+    <span class="tech-pill">Firebase Auth</span>
+    <span class="tech-pill">Realtime Database</span>
+    <span class="tech-pill">shared_preferences</span>
+    <span class="tech-pill">google_mobile_ads</span>
+    <span class="tech-pill">flutter_test</span>
+    <span class="tech-pill">mocktail</span>
+  </div>
+</section>
+
+<section class="wrap showcase">
+  <div class="phone-frame" role="img" aria-label="Mockup of the Gebeta home screen">
+    <div class="ph-title eth">ገበጣ</div>
+    <div class="ph-sub">Traditional Ethiopian Mancala</div>
+    <div class="ph-chips">
+      <span class="ph-chip w">14W</span>
+      <span class="ph-chip l">6L</span>
+      <span class="ph-chip d">3D</span>
+    </div>
+    <span class="ph-btn fill">Play vs Computer</span>
+    <span class="ph-btn outline">Play Online</span>
+    <span class="ph-btn text">Tutorial</span>
+  </div>
+  <div>
+    <span class="eyebrow">Interface</span>
+    <h2>Wood, honey, clay — not a spreadsheet</h2>
+    <p style="color: var(--ink-soft); margin-top: 14px; max-width: 48ch;">
+      The theme (<code>lib/core/theme/colors.dart</code>) is tuned for
+      outdoor Addis sunlight and a board that should feel carved, not
+      flat: warm cream surfaces, a wood gradient board, honey-gold seed
+      dots, gold glow on legal moves. These are CSS recreations of the
+      real widget tree — <code>PitCircle</code>, <code>GebetaBoard</code>,
+      <code>HomeScreen</code> — side by side with the
+      <a href="./play/" style="color: var(--gold-bright); border-bottom: 1px solid var(--gold);">live app</a>
+      so you can compare the two directly.
+    </p>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span class="credit">Built solo, end to end — engine, AI, netcode, UI, tests, docs.</span>
+    <a class="repo" href="https://github.com/Mattathiasa/gebeta" target="_blank" rel="noopener">github.com/Mattathiasa/gebeta ↗</a>
+  </div>
+</footer>

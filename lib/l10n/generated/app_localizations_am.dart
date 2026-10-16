@@ -22,6 +22,9 @@ class AppLocalizationsAm extends AppLocalizations {
   String get playOnline => 'በአንድ መስመር አጫውት';
 
   @override
+  String get passAndPlay => 'በተራ ይጫወቱ';
+
+  @override
   String get tutorial => 'እንዴት እንደሚጫወቱ';
 
   @override
@@ -74,4 +77,34 @@ class AppLocalizationsAm extends AppLocalizations {
 
   @override
   String get copied => 'ተቀድቷል';
+
+  @override
+  String get playerA => 'ተጫዋች A';
+
+  @override
+  String get playerB => 'ተጫዋች B';
+
+  @override
+  String get playerATurn => 'የተጫዋች A ዙር';
+
+  @override
+  String get playerBTurn => 'የተጫዋች B ዙር';
+
+  @override
+  String get passDeviceTitle => 'መሳሪያውን ያስተላልፉ';
+
+  @override
+  String get passToPlayerA => 'ለተጫዋች A ያስተላልፉ';
+
+  @override
+  String get passToPlayerB => 'ለተጫዋች B ያስተላልፉ';
+
+  @override
+  String get tapToContinue => 'ለመቀጠል ይንኩ';
+
+  @override
+  String get playerAWins => 'ተጫዋች A አሸነፈ!';
+
+  @override
+  String get playerBWins => 'ተጫዋች B አሸነፈ!';
 }

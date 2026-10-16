@@ -2,6 +2,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../features/game/presentation/ai_game_screen.dart';
+import '../../features/game/presentation/pass_and_play_screen.dart';
 import '../../features/home/presentation/home_screen.dart';
 import '../../features/multiplayer/presentation/lobby_screen.dart';
 import '../../features/multiplayer/presentation/online_game_screen.dart';
@@ -23,6 +24,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: Routes.gameAi,
         builder: (_, _) => const AiGameScreen(),
+      ),
+      GoRoute(
+        path: Routes.gameLocal,
+        builder: (_, _) => const PassAndPlayScreen(),
       ),
       GoRoute(
         path: Routes.lobby,

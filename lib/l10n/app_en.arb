@@ -4,6 +4,7 @@
   "homeTitle": "ገበጣ · Gebeta",
   "playVsAi": "Play vs Computer",
   "playOnline": "Play Online",
+  "passAndPlay": "Pass & Play",
   "tutorial": "How to Play",
   "settings": "Settings",
   "difficulty": "Difficulty",
@@ -21,5 +22,15 @@
   "joinRoom": "Join Room",
   "roomCode": "Room Code",
   "waitingForOpponent": "Waiting for opponent…",
-  "copied": "Copied"
+  "copied": "Copied",
+  "playerA": "Player A",
+  "playerB": "Player B",
+  "playerATurn": "Player A's turn",
+  "playerBTurn": "Player B's turn",
+  "passDeviceTitle": "Pass the device",
+  "passToPlayerA": "Hand it to Player A",
+  "passToPlayerB": "Hand it to Player B",
+  "tapToContinue": "Tap to continue",
+  "playerAWins": "Player A wins!",
+  "playerBWins": "Player B wins!"
 }

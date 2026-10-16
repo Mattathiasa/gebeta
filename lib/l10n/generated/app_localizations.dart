@@ -122,6 +122,12 @@ abstract class AppLocalizations {
   /// **'Play Online'**
   String get playOnline;
 
+  /// No description provided for @passAndPlay.
+  ///
+  /// In en, this message translates to:
+  /// **'Pass & Play'**
+  String get passAndPlay;
+
   /// No description provided for @tutorial.
   ///
   /// In en, this message translates to:
@@ -229,6 +235,66 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Copied'**
   String get copied;
+
+  /// No description provided for @playerA.
+  ///
+  /// In en, this message translates to:
+  /// **'Player A'**
+  String get playerA;
+
+  /// No description provided for @playerB.
+  ///
+  /// In en, this message translates to:
+  /// **'Player B'**
+  String get playerB;
+
+  /// No description provided for @playerATurn.
+  ///
+  /// In en, this message translates to:
+  /// **'Player A\'s turn'**
+  String get playerATurn;
+
+  /// No description provided for @playerBTurn.
+  ///
+  /// In en, this message translates to:
+  /// **'Player B\'s turn'**
+  String get playerBTurn;
+
+  /// No description provided for @passDeviceTitle.
+  ///
+  /// In en, this message translates to:
+  /// **'Pass the device'**
+  String get passDeviceTitle;
+
+  /// No description provided for @passToPlayerA.
+  ///
+  /// In en, this message translates to:
+  /// **'Hand it to Player A'**
+  String get passToPlayerA;
+
+  /// No description provided for @passToPlayerB.
+  ///
+  /// In en, this message translates to:
+  /// **'Hand it to Player B'**
+  String get passToPlayerB;
+
+  /// No description provided for @tapToContinue.
+  ///
+  /// In en, this message translates to:
+  /// **'Tap to continue'**
+  String get tapToContinue;
+
+  /// No description provided for @playerAWins.
+  ///
+  /// In en, this message translates to:
+  /// **'Player A wins!'**
+  String get playerAWins;
+
+  /// No description provided for @playerBWins.
+  ///
+  /// In en, this message translates to:
+  /// **'Player B wins!'**
+  String get playerBWins;
 }
 
 class _AppLocalizationsDelegate

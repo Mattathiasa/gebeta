@@ -4,6 +4,7 @@
   "homeTitle": "ገበጣ",
   "playVsAi": "ከኮምፒዉተር ጋር አጫውት",
   "playOnline": "በአንድ መስመር አጫውት",
+  "passAndPlay": "በተራ ይጫወቱ",
   "tutorial": "እንዴት እንደሚጫወቱ",
   "settings": "ቅንብሮች",
   "difficulty": "የስልክ ደረጃ",
@@ -21,5 +22,15 @@
   "joinRoom": "ወደ ክፍል ቀጠር",
   "roomCode": "የክፍል ኮድ",
   "waitingForOpponent": "ተጫዋቹን በመጠባበቅ ላይ…",
-  "copied": "ተቀድቷል"
+  "copied": "ተቀድቷል",
+  "playerA": "ተጫዋች A",
+  "playerB": "ተጫዋች B",
+  "playerATurn": "የተጫዋች A ዙር",
+  "playerBTurn": "የተጫዋች B ዙር",
+  "passDeviceTitle": "መሳሪያውን ያስተላልፉ",
+  "passToPlayerA": "ለተጫዋች A ያስተላልፉ",
+  "passToPlayerB": "ለተጫዋች B ያስተላልፉ",
+  "tapToContinue": "ለመቀጠል ይንኩ",
+  "playerAWins": "ተጫዋች A አሸነፈ!",
+  "playerBWins": "ተጫዋች B አሸነፈ!"
 }

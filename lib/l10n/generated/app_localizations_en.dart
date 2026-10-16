@@ -22,6 +22,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get playOnline => 'Play Online';
 
   @override
+  String get passAndPlay => 'Pass & Play';
+
+  @override
   String get tutorial => 'How to Play';
 
   @override
@@ -74,4 +77,34 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get copied => 'Copied';
+
+  @override
+  String get playerA => 'Player A';
+
+  @override
+  String get playerB => 'Player B';
+
+  @override
+  String get playerATurn => 'Player A\'s turn';
+
+  @override
+  String get playerBTurn => 'Player B\'s turn';
+
+  @override
+  String get passDeviceTitle => 'Pass the device';
+
+  @override
+  String get passToPlayerA => 'Hand it to Player A';
+
+  @override
+  String get passToPlayerB => 'Hand it to Player B';
+
+  @override
+  String get tapToContinue => 'Tap to continue';
+
+  @override
+  String get playerAWins => 'Player A wins!';
+
+  @override
+  String get playerBWins => 'Player B wins!';
 }

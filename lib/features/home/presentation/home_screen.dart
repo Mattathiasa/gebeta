@@ -55,6 +55,11 @@ class HomeScreen extends ConsumerWidget {
                     child: Text(l10n.playOnline),
                   ),
                   const SizedBox(height: GebetaSpacing.md),
+                  OutlinedButton(
+                    onPressed: () => context.go(Routes.gameLocal),
+                    child: Text(l10n.passAndPlay),
+                  ),
+                  const SizedBox(height: GebetaSpacing.md),
                   TextButton(
                     onPressed: () => context.go(Routes.tutorial),
                     child: Text(l10n.tutorial),

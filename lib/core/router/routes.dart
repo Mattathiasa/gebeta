@@ -4,6 +4,7 @@ abstract final class Routes {
   static const tutorial = '/tutorial';
   static const settings = '/settings';
   static const gameAi = '/game/ai';
+  static const gameLocal = '/game/local';
   static const lobby = '/online';
   static const gameOnline = '/online/game';
 }

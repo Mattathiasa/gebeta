@@ -17,8 +17,8 @@ class GebetaAi {
   final AiDifficulty difficulty;
   final SeededRng _rng;
 
-  static const _hardBudgetMs = 900;
-  static const _hardMaxDepth = 8;
+  static const _hardBudgetMs = 1200;
+  static const _hardMaxDepth = 12;
 
   /// Picks a move for [state]'s side to move. Returns null if the game
   /// is over or the player must pass.
@@ -31,22 +31,45 @@ class GebetaAi {
       case AiDifficulty.easy:
         return _chooseEasy(state, moves);
       case AiDifficulty.medium:
-        return _minimaxRoot(state, moves, depth: 2);
+        return _minimaxRoot(state, moves, depth: 4);
       case AiDifficulty.hard:
         return _chooseHard(state, moves);
     }
   }
 
-  /// Roughly 70% random, 30% takes a capture if one exists — beats
-  /// beginners occasionally without ever feeling psychic.
+  /// Takes its biggest capture half the time, and half the time steers
+  /// away from moves that hand the opponent an immediate big capture —
+  /// but still plays randomly often enough to lose to beginners.
   int? _chooseEasy(GebetaState state, List<int> moves) {
     final capturing = moves
         .where((m) => _capturedSeeds(state, m) > 0)
         .toList(growable: false);
-    if (capturing.isNotEmpty && _rng.nextInt(10) < 3) {
-      return capturing[_rng.nextInt(capturing.length)];
+    if (capturing.isNotEmpty && _rng.nextInt(10) < 5) {
+      capturing.sort(
+        (a, b) => _capturedSeeds(state, b).compareTo(_capturedSeeds(state, a)),
+      );
+      return capturing.first;
+    }
+
+    if (_rng.nextInt(10) < 5) {
+      final safe = moves
+          .where((m) => _opponentBestReply(state, m) < 3)
+          .toList(growable: false);
+      if (safe.isNotEmpty) return safe[_rng.nextInt(safe.length)];
     }
     return moves[_rng.nextInt(moves.length)];
+  }
+
+  /// The opponent's best immediate capture after [move] — a cheap 1-ply
+  /// check so easy avoids the most obvious blunders without searching.
+  int _opponentBestReply(GebetaState state, int move) {
+    final next = state.apply(move);
+    var best = 0;
+    for (final reply in next.legalMoves()) {
+      final gain = _capturedSeeds(next, reply);
+      if (gain > best) best = gain;
+    }
+    return best;
   }
 
   int _chooseHard(GebetaState state, List<int> moves) {
@@ -81,11 +104,13 @@ class GebetaAi {
       if (budget != null && budget.elapsedMilliseconds > _hardBudgetMs) {
         return null; // incomplete
       }
-      final score = _minimax(
+      // Negamax: the child is scored from the opponent's perspective, so
+      // negate it to get its value from ours.
+      final score = -_minimax(
         state.apply(move),
         depth - 1,
-        alpha,
-        beta,
+        -beta,
+        -alpha,
         budget,
       );
       if (score > bestScore) {
@@ -121,24 +146,24 @@ class GebetaAi {
     if (depth == 0) return _evaluate(state);
 
     final ordered = _orderMoves(state, moves);
-    final maximizing = true; // always the mover's turn in this recursion
 
     var best = -0x7fffffff;
     for (final move in ordered) {
       if (budget != null && budget.elapsedMilliseconds > _hardBudgetMs) {
         break;
       }
-      final score = _minimax(
+      // Negamax: negate the child (opponent's-perspective) score to get
+      // its value from this node's mover's perspective.
+      final score = -_minimax(
         state.apply(move),
         depth - 1,
-        alpha,
-        beta,
+        -beta,
+        -alpha,
         budget,
       );
       if (score > best) best = score;
       if (best > alpha) alpha = best;
-      if (beta <= alpha) break; // prune
-      assert(maximizing);
+      if (alpha >= beta) break; // prune
     }
     return best;
   }
@@ -158,17 +183,33 @@ class GebetaAi {
       final forMover = state.toMove == Player.a ? result : -result;
       return forMover * 100000;
     }
-    return _minimax(passed, depth, alpha, beta, budget);
+    // passed.toMove is the opponent; negate back to state.toMove's view.
+    return -_minimax(passed, depth, -beta, -alpha, budget);
   }
 
-  /// Heuristic, from the side-to-move's perspective.
-  /// Material leads; a small mobility term breaks equal-material ties.
+  /// Heuristic, from the side-to-move's perspective. Material leads by a
+  /// wide margin; mobility and exposed pits break near-ties and steer the
+  /// search away from handing the opponent a free capture.
   int _evaluate(GebetaState state) {
-    final material = state.scoreA - state.scoreB;
-    final forMover = state.toMove == Player.a ? material : -material;
-    final mobility =
-        state.seedsInRow(state.toMove) - state.seedsInRow(opponentOf(state.toMove));
-    return forMover * 100 + (state.toMove == Player.a ? mobility : -mobility);
+    final mover = state.toMove;
+    final opp = opponentOf(mover);
+
+    final material = state.scoreOf(mover) - state.scoreOf(opp);
+    final mobility = state.seedsInRow(mover) - state.seedsInRow(opp);
+    final exposure = _exposedPits(state, opp) - _exposedPits(state, mover);
+
+    return material * 100 + mobility + exposure * 6;
+  }
+
+  /// Pits sitting at 1 or 2 seeds are one sow away from holding 2 or 3 —
+  /// i.e. one move from being capturable.
+  int _exposedPits(GebetaState state, Player player) {
+    final start = player == Player.a ? 0 : 6;
+    var count = 0;
+    for (var i = start; i < start + 6; i++) {
+      if (state.pits[i] == 1 || state.pits[i] == 2) count++;
+    }
+    return count;
   }
 
   List<int> _orderMoves(GebetaState state, List<int> moves) {
